@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/event_list_item"
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/floor_plan"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#FFFFFF"
+            android:padding="0dp"/>
+        <include layout="@layout/description_layout"
+            android:id="@+id/description_layout"/>
+        <include layout="@layout/people_layout"
+            android:id="@+id/people_layout"/>
+        <include layout="@layout/companies_layout"
+            android:id="@+id/companies_layout"/>
+    </LinearLayout>
+</ScrollView>

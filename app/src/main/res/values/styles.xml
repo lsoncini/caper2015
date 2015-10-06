@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
+    <style name="YellowActionBarTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryDark">#000000</item>
+    </style>
+
+    <style name="PrincipalTextStyle">
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SecondaryTextStyle">
+        <item name="android:textColor">@color/color_pallete_dark_gray</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="MyTabTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarTabBarStyle">@style/MyTabTheme.ActionBar.TabBar</item>
+        <item name="android:actionBarTabTextStyle">@style/MyTabTheme.ActionBar.TabText</item>
+    </style>
+
+    <style name="MyTabTheme.ActionBar.TabBar" parent="android:style/Widget.Holo.Light.ActionBar.TabBar">
+        <item name="android:background">@color/primary_color</item>
+    </style>
+
+    <style name="MyTabTheme.ActionBar.TabText" parent="android:style/Widget.Holo.ActionBar.TabText">
+        <item name="android:textAppearance">@style/PrincipalTextStyle</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.caper.caper2015.view.StandList
+            android:id="@+id/standList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <include layout="@layout/empty_fav_list"
+            android:id="@+id/empty_view"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

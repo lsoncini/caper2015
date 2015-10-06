@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_pallete_dark_gray">
+    <TextView
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/section_title_bg"
+        android:textAppearance="@style/PrincipalTextStyle"
+        android:paddingLeft="20dp"
+        android:textAllCaps="true"
+        android:text="@string/people"/>
+
+    <com.caper.caper2015.view.ContactList
+        android:id="@+id/humansList"
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

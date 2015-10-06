@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_color">#fff9cb2e</color>
+    <color name="secondary_color">#ff1b3b66</color>
+
+    <color name="hyperlink_color">#ff0645ad</color>
+
+    <color name="color_pallete_red">#fffd3d39</color>
+    <color name="color_pallete_orange">#fffe9526</color>
+    <color name="color_pallete_yellow">#ffffcb2f</color>
+    <color name="color_pallete_green">#ff53d86a</color>
+    <color name="color_pallete_cyan">#ff3cabdb</color>
+    <color name="color_pallete_blue">#ff167fdb</color>
+    <color name="color_pallete_purple">#ff595bd4</color>
+    <color name="color_pallete_pink">#fffd3259</color>
+    <color name="color_pallete_dark_gray">#ff8e8f93</color>
+    <color name="color_pallete_light_gray">#ffc8c8cc</color>
+
+</resources>
