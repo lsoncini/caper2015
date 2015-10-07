@@ -18,7 +18,7 @@
     <string name="events_title">Events</string>
     <string name="maps_title">Maps</string>
     <string name="info_title">About</string>
-    <string name="favs_title">Favs</string>
+    <string name="favs_title">Favorites</string>
     <string name="settings_title">Settings</string>
 
     <string name="hello_world">Hello world!</string>

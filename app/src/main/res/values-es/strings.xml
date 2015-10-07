@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Caper2015</string>
+    <string name="app_name">Caper 2015</string>
     <string name="action_settings">Ajustes</string>
     <string name="actions">Contacto</string>
     <string name="companies">Empresas</string>
@@ -13,7 +13,7 @@
     <string name="maps_title">Planos</string>
     <string name="people">Personas</string>
     <string name="settings_title">Ajustes</string>
-    <string name="stands_title">Stands</string>
+    <string name="stands_title">Expositores</string>
     <string name="phone">Teléfono</string>
     <string name="web">Web</string>
     <string name="email">Correo</string>
@@ -28,7 +28,7 @@
     <string name="update_data">Actualizar datos</string>
     <string name="add_to_fav">[+] Agregar a Favoritos</string>
     <string name="remove_from_fav">[-] Quitar de Favoritos</string>
-    <string name="favs_title">Favs</string>
+    <string name="favs_title">Favoritos</string>
     <string name="add_favs_msg">Agrega tus expositores favoritos!</string>
     <string name="add_favs_sub">Puedes agregar expositores a los favoritos desde el detalle de cada uno de ellos.</string>
 </resources>

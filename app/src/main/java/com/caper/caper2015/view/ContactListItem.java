@@ -7,8 +7,6 @@ import android.widget.TextView;
 
 import com.caper.caper2015.R;
 
-import java.text.SimpleDateFormat;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -55,6 +53,8 @@ public class ContactListItem extends FrameLayout {
         String[] words = name.split(" ");
         for(String s : words){
             ans = ans+s.charAt(0);
+            if(ans.length()==4)
+                break;
         }
         return ans.toUpperCase();
     }
