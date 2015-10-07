@@ -92,6 +92,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_events"
             android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/MyTabTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -102,6 +103,7 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_favorites"
             android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/YellowActionBarTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
