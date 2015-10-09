@@ -60,8 +60,11 @@ public class EventDetailFragment extends LoadingFragment {
     @Bind(R.id.companiesList)       ContactList companiesList;
 
     @Bind(R.id.description_layout)  LinearLayout descriptionLayout;
+    @Bind(R.id.description_title)   TextView descriptionTitle;
     @Bind(R.id.people_layout)       LinearLayout peopleLayout;
+    @Bind(R.id.people_title)        TextView peopleTitle;
     @Bind(R.id.companies_layout)    LinearLayout companiesLayout;
+    @Bind(R.id.companies_title)     TextView companiesTitle;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
     public Event event;
@@ -99,6 +102,11 @@ public class EventDetailFragment extends LoadingFragment {
 
     private void loadFullEvent(final Event event) {
         this.event = event;
+
+        companiesTitle.setText(R.string.companies);
+        peopleTitle.setText(R.string.people_event);
+        descriptionTitle.setText(R.string.description);
+
 
         date.setVisibility(View.VISIBLE);
         date.setText(sdf.format(event.getDateStart()));

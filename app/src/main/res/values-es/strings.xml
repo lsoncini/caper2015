@@ -2,22 +2,21 @@
 <resources>
     <string name="app_name">Caper 2015</string>
     <string name="action_settings">Ajustes</string>
-    <string name="actions">Contacto</string>
-    <string name="companies">Empresas</string>
-    <string name="description">Descripción</string>
+    <string name="actions">Información de contacto</string>
+    <string name="companies">Empresas relacionadas</string>
+    <string name="description">Descripción del evento</string>
     <string name="events_title">Eventos</string>
     <string name="hello_world">Hola mundo!</string>
     <string name="info_title">Info</string>
     <string name="loading">Cargando...</string>
     <string name="locations">Ubicaciones</string>
     <string name="maps_title">Planos</string>
-    <string name="people">Personas</string>
     <string name="settings_title">Ajustes</string>
     <string name="stands_title">Expositores</string>
     <string name="phone">Teléfono</string>
     <string name="web">Web</string>
     <string name="email">Correo</string>
-    <string name="social">Social</string>
+    <string name="social">Redes sociales</string>
     <string name="cancel">SALIR</string>
     <string name="error_loading">No hay conexión de internet</string>
     <string name="ok">REINTENTAR</string>
@@ -27,8 +26,12 @@
     <string name="settings_msg">Necesita conexión a internet para actualizar la aplicación</string>
     <string name="update_data">Actualizar datos</string>
     <string name="add_to_fav">[+] Agregar a Favoritos</string>
-    <string name="remove_from_fav">[-] Quitar de Favoritos</string>
+    <string name="remove_from_fav">[-] Eliminar de Favoritos</string>
     <string name="favs_title">Favoritos</string>
     <string name="add_favs_msg">Agrega tus expositores favoritos!</string>
     <string name="add_favs_sub">Puedes agregar expositores a los favoritos desde el detalle de cada uno de ellos.</string>
+    <string name="contact_info">Datos de contacto</string>
+    <string name="description_company">Actividad principal</string>
+    <string name="people_company">Contactos en la exposición</string>
+    <string name="people_event">Disertantes</string>
 </resources>

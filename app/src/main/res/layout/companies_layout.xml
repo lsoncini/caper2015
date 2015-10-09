@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/color_pallete_dark_gray">
     <TextView
+        android:id="@+id/companies_title"
         android:layout_marginBottom="1dp"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"

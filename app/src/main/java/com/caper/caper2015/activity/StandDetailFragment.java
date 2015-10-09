@@ -61,7 +61,9 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
 
     @Bind(R.id.location_layout)     LinearLayout locationLayout;
     @Bind(R.id.description_layout)  LinearLayout descriptionLayout;
+    @Bind(R.id.description_title)   TextView descriptionTitle;
     @Bind(R.id.people_layout)       LinearLayout peopleLayout;
+    @Bind(R.id.people_title)        TextView peopleTitle;
 
     public Company stand;
     public Bitmap bitmap;
@@ -118,6 +120,9 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
     private void loadFullStand(final Company stand) {
         this.stand = stand;
         name.setText(stand.getName());
+
+        peopleTitle.setText(R.string.people_company);
+        descriptionTitle.setText(R.string.description_company);
 
         Set<String> ids = getActivity().getSharedPreferences("favorites", Context.MODE_PRIVATE).getStringSet("ids", new HashSet<String>());
         if(ids.contains(stand.getObjectId())) {
