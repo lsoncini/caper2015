@@ -12,8 +12,7 @@
         android:background="@drawable/section_title_bg"
         android:textAppearance="@style/PrincipalTextStyle"
         android:paddingLeft="20dp"
-        android:textAllCaps="true"
-        android:text="@string/people"/>
+        android:textAllCaps="true"/>
 
     <com.caper.caper2015.view.ContactList
         android:id="@+id/humansList"
