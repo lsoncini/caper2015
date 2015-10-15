@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
@@ -17,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZZEventsActivity extends TabActivity {
+public class ZZEventsActivity extends TabActivity implements EventDetailFragment.EventDetailListener{
     // TabSpec Names
     private static final String FIRST_DAY = "28 oct. 2015";
     private static final String SECOND_DAY = "29 oct. 2015";
@@ -110,5 +111,15 @@ public class ZZEventsActivity extends TabActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void detailOpened() {
+        getTabHost().getTabWidget().setVisibility(View.GONE);
+    }
+
+    @Override
+    public void detailClosed() {
+        getTabHost().getTabWidget().setVisibility(View.VISIBLE);
     }
 }

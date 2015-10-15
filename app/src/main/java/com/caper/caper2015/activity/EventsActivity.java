@@ -11,7 +11,7 @@ import com.caper.caper2015.view.EventList;
 
 import java.util.ArrayList;
 
-public class EventsActivity extends ActionBarActivity implements EventList.EventListListener {
+public class EventsActivity extends ActionBarActivity implements EventList.EventListListener, EventDetailFragment.EventDetailListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,10 @@ public class EventsActivity extends ActionBarActivity implements EventList.Event
 
     @Override
     public void onEventSelected(Event event, int position) {
-        navTo(new EventDetailFragment().setEvent(event,position));
+        EventDetailFragment f = new EventDetailFragment().setEvent(event,position);
+        f.addEventDetailListener((EventDetailFragment.EventDetailListener)getParent());
+        f.addEventDetailListener(this);
+        navTo(f);
     }
 
     void navTo(LoadingFragment fragment) {
@@ -51,5 +54,15 @@ public class EventsActivity extends ActionBarActivity implements EventList.Event
                 .addToBackStack("")
                 .commit()
         ;
+    }
+
+    @Override
+    public void detailOpened() {
+        getSupportActionBar().show();
+    }
+
+    @Override
+    public void detailClosed() {
+        getSupportActionBar().hide();
     }
 }

@@ -28,11 +28,6 @@ import com.caper.caper2015.parse.Event;
 import com.caper.caper2015.parse.Human;
 import com.caper.caper2015.view.ContactList;
 import com.caper.caper2015.view.EventListItem;
-import com.parse.GetCallback;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -77,6 +72,12 @@ public class EventDetailFragment extends LoadingFragment {
     public Event event;
     int position;
     public Bitmap bitmap;
+    List<EventDetailListener> l = new ArrayList<>();
+
+    public interface EventDetailListener{
+        public void detailOpened();
+        public void detailClosed();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,6 +90,18 @@ public class EventDetailFragment extends LoadingFragment {
     public void onStart() {
         super.onStart();
         updateView();
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        for(EventDetailListener listener : l)
+            listener.detailClosed();
+    }
+
+    public void addEventDetailListener(EventDetailListener listener){
+        l.add(listener);
+        //listener.detailOpened();
     }
 
     public EventDetailFragment setEvent(Event event, int position) {
@@ -104,6 +117,8 @@ public class EventDetailFragment extends LoadingFragment {
 
         loadFullEvent(event);
 
+        for(EventDetailListener e : l)
+            e.detailOpened();
         hideSpinner();
     }
 
