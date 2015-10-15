@@ -8,11 +8,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -32,6 +34,11 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -154,7 +161,23 @@ public class EventDetailFragment extends LoadingFragment {
             companiesList.setContacts(companiesNameList,null);
         }
 
-        setBuildingData();
+        //setBuildingData();
+        ViewTreeObserver vto = map.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                paintMap();
+                ViewTreeObserver obs = map.getViewTreeObserver();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    obs.removeOnGlobalLayoutListener(this);
+                } else {
+                    obs.removeGlobalOnLayoutListener(this);
+                }
+            }
+
+        });
         /*if(bitmap==null) {
             File file = new File(getActivity().getFilesDir(), event.getBooth().getBuilding().getObjectId());
             byte[] data = MapDisplayActivity.convertFileToByteArray(file);
@@ -194,7 +217,7 @@ public class EventDetailFragment extends LoadingFragment {
         });
 
     }
-
+/*
     public void setBuildingData(){
         ParseQuery<Building> query = new ParseQuery<Building>("Building").fromLocalDatastore();
 
@@ -243,7 +266,7 @@ public class EventDetailFragment extends LoadingFragment {
             }
         });
     }
-
+*/
     private void setCroppedImage(int xMap, int yMap, Bitmap bitmap){
         int width = map.getWidth();
         int height = map.getHeight();
@@ -266,5 +289,61 @@ public class EventDetailFragment extends LoadingFragment {
 
         Bitmap focusBitmap = Bitmap.createBitmap(bitmap, focusX<0? 0:focusX,focusY<0 ? 0 : focusY, width, height);
         map.setImageBitmap(focusBitmap);
+    }
+
+    Bitmap getBitmap(Building building){
+        Bitmap bitmap;
+        File file = new File(getActivity().getFilesDir(),building.getObjectId());
+        byte[] data = convertFileToByteArray(file);
+        bitmap = BitmapFactory
+                .decodeByteArray(
+                        data,0,
+                        data.length);
+        return bitmap;
+    }
+
+    public static byte[] convertFileToByteArray(File f)
+    {
+        byte[] byteArray = null;
+        try
+        {
+            InputStream inputStream = new FileInputStream(f);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024*8];
+            int bytesRead = 0;
+
+            while ((bytesRead = inputStream.read(b)) != -1)
+            {
+                bos.write(b, 0, bytesRead);
+            }
+
+            byteArray = bos.toByteArray();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return byteArray;
+    }
+
+    public void paintMap(){
+        bitmap = getBitmap(event.getBooth().getBuilding());
+
+        Bitmap tempBitmap = bitmap.copy(Bitmap.Config.RGB_565,true);
+        Canvas tempCanvas = new Canvas(tempBitmap);
+        tempCanvas.drawBitmap(tempBitmap, 0, 0, null);
+        Booth b = event.getBooth();
+        Paint paint = new Paint();
+        paint.setColor(getResources().getColor(R.color.primary_color));
+        Paint paintBorder = new Paint();
+        paintBorder.setColor(Color.BLACK);
+        paintBorder.setStrokeWidth(3);
+        paintBorder.setStyle(Paint.Style.STROKE);
+        tempCanvas.drawCircle(b.getLocationX(), b.getLocationY(), 20, paint);
+        tempCanvas.drawCircle(b.getLocationX(), b.getLocationY(), 20, paintBorder);
+
+        bitmap=tempBitmap;
+
+        setCroppedImage(b.getLocationX(),b.getLocationY(),tempBitmap);
     }
 }

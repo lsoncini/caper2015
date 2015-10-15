@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +35,11 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -180,7 +187,23 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
             locationLayout.setVisibility(View.GONE);
         }else{
             boothsList.setBooths(booths, this);
-            setBuildingData();
+            //setBuildingData();
+            ViewTreeObserver vto = map.getViewTreeObserver();
+            vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+                @Override
+                public void onGlobalLayout() {
+                    paintMap();
+                    ViewTreeObserver obs = map.getViewTreeObserver();
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        obs.removeOnGlobalLayoutListener(this);
+                    } else {
+                        obs.removeGlobalOnLayoutListener(this);
+                    }
+                }
+
+            });
         }
 
         map.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +221,7 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
             }
         });
     }
-
+/*
     public void setBuildingData(){
         ParseQuery<Building> query = new ParseQuery<Building>("Building").fromLocalDatastore();
         query.getInBackground(stand.getBooths().get(0).getBuilding().getObjectId(), new GetCallback<Building>() {
@@ -249,7 +272,7 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
             }
         });
     }
-
+*/
     private void setCroppedImage(int xMap, int yMap, Bitmap bitmap){
         int width = map.getWidth();
         int height = map.getHeight();
@@ -275,5 +298,63 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
     @Override
     public void onBoothItemSelected(Booth booth) {
         setCroppedImage(booth.getLocationX(),booth.getLocationY(),bitmap);
+    }
+
+    Bitmap getBitmap(Building building){
+        Bitmap bitmap;
+        File file = new File(getActivity().getFilesDir(),building.getObjectId());
+        byte[] data = convertFileToByteArray(file);
+        bitmap = BitmapFactory
+                .decodeByteArray(
+                        data,0,
+                        data.length);
+        return bitmap;
+    }
+
+    public static byte[] convertFileToByteArray(File f)
+    {
+        byte[] byteArray = null;
+        try
+        {
+            InputStream inputStream = new FileInputStream(f);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] b = new byte[1024*8];
+            int bytesRead = 0;
+
+            while ((bytesRead = inputStream.read(b)) != -1)
+            {
+                bos.write(b, 0, bytesRead);
+            }
+
+            byteArray = bos.toByteArray();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return byteArray;
+    }
+
+    public void paintMap(){
+        bitmap = getBitmap(stand.getBooths().get(0).getBuilding());
+
+        Bitmap tempBitmap = bitmap.copy(Bitmap.Config.RGB_565,true);
+        Canvas tempCanvas = new Canvas(tempBitmap);
+        tempCanvas.drawBitmap(tempBitmap, 0, 0, null);
+        Paint paint = new Paint();
+        paint.setColor(getResources().getColor(R.color.primary_color));
+        Paint paintBorder = new Paint();
+        paintBorder.setColor(Color.BLACK);
+        paintBorder.setStrokeWidth(3);
+        paintBorder.setStyle(Paint.Style.STROKE);
+        for(Booth booth : stand.getBooths()) {
+            tempCanvas.drawCircle(booth.getLocationX(), booth.getLocationY(), 20, paint);
+            tempCanvas.drawCircle(booth.getLocationX(), booth.getLocationY(), 20, paintBorder);
+        }
+
+        bitmap=tempBitmap;
+
+        Booth b = stand.getBooths().get(0);
+        setCroppedImage(b.getLocationX(),b.getLocationY(),tempBitmap);
     }
 }
