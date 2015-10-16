@@ -29,25 +29,19 @@ import com.caper.caper2015.parse.Human;
 import com.caper.caper2015.view.BoothList;
 import com.caper.caper2015.view.BoothListItem;
 import com.caper.caper2015.view.ContactList;
-import com.parse.GetCallback;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class StandDetailFragment extends LoadingFragment implements BoothListItem.BoothListItemListener {
 
@@ -74,6 +68,11 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
 
     public Company stand;
     public Bitmap bitmap;
+    public FavoritesListener listener;
+
+    public interface FavoritesListener{
+        public void onFavoriteListChanged();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,6 +87,8 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
                 getActivity().getSharedPreferences("favorites", Context.MODE_PRIVATE).edit().putStringSet("ids",ids).commit();
                 removeFav.setVisibility(View.VISIBLE);
                 addFav.setVisibility(View.GONE);
+                if(listener!=null)
+                    listener.onFavoriteListChanged();
             }
         });
         removeFav.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +96,12 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
             public void onClick(View v) {
                 Set<String> ids = getActivity().getSharedPreferences("favorites", Context.MODE_PRIVATE).getStringSet("ids", new HashSet<String>());
                 ids.remove(stand.getObjectId());
+
                 getActivity().getSharedPreferences("favorites", Context.MODE_PRIVATE).edit().putStringSet("ids",ids).commit();
                 addFav.setVisibility(View.VISIBLE);
                 removeFav.setVisibility(View.GONE);
+                if(listener!=null)
+                    listener.onFavoriteListChanged();
             }
         });
         return view;
@@ -113,6 +117,10 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
         this.stand = stand;
         updateView();
         return this;
+    }
+
+    public void setFavoritesListener(FavoritesListener l){
+        listener = l;
     }
 
     private void updateView() {

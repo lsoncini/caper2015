@@ -1,7 +1,6 @@
 package com.caper.caper2015.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 
@@ -15,7 +14,9 @@ import java.util.HashSet;
 /**
  * Created by Lucas on 06/10/2015.
  */
-public class FavoritesActivity extends ActionBarActivity implements StandList.StandListListener{
+public class FavoritesActivity extends ActionBarActivity implements StandList.StandListListener, StandDetailFragment.FavoritesListener{
+
+    StandListFragment slf = new StandListFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +26,10 @@ public class FavoritesActivity extends ActionBarActivity implements StandList.St
         if (savedInstanceState == null) {
             Bundle b = new Bundle();
             b.putStringArrayList("ids",ids);
-            Fragment f = new StandListFragment();
-            f.setArguments(b);
+            slf = new StandListFragment();
+            slf.setArguments(b);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, f)
+                    .add(R.id.container, slf)
                     .commit()
             ;
         }
@@ -43,7 +44,9 @@ public class FavoritesActivity extends ActionBarActivity implements StandList.St
 
     @Override
     public void onStandSelected(Company stand) {
-        navTo(new StandDetailFragment().setStand(stand));
+        StandDetailFragment standDetailFragment = new StandDetailFragment().setStand(stand);
+        standDetailFragment.setFavoritesListener(this);
+        navTo(standDetailFragment);
     }
 
     void navTo(LoadingFragment fragment) {
@@ -52,5 +55,10 @@ public class FavoritesActivity extends ActionBarActivity implements StandList.St
                 .addToBackStack("")
                 .commit()
         ;
+    }
+
+    @Override
+    public void onFavoriteListChanged() {
+        ((StandDetailFragment.FavoritesListener)slf).onFavoriteListChanged();
     }
 }
