@@ -3,15 +3,6 @@ package com.caper.caper2015.activity;
 /**
  * Created by Lucas on 15/09/2015.
  */
-import java.io.File;
-import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -22,6 +13,9 @@ import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
@@ -40,6 +34,16 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -52,6 +56,14 @@ public class SplashScreenActivity extends Activity {
     AlertDialog alertDialog;
     @Bind(R.id.loading)
     TextView loadingTV;
+
+    Handler mhandler = new Handler(Looper.getMainLooper()){
+        @Override
+        public void handleMessage(Message inputMessage) {
+            super.handleMessage(inputMessage);
+            alertDialog.show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,7 +230,7 @@ public class SplashScreenActivity extends Activity {
             startActivity(mainIntent);
             finish();
         } else{
-            alertDialog.show();
+            mhandler.sendEmptyMessage(0);
         }
     }
 
