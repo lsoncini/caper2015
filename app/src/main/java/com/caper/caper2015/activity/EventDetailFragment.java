@@ -38,8 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class EventDetailFragment extends LoadingFragment {
 
@@ -89,6 +89,12 @@ public class EventDetailFragment extends LoadingFragment {
     @Override
     public void onStart() {
         super.onStart();
+        updateView();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         updateView();
     }
 

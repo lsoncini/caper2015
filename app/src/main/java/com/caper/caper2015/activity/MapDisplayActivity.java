@@ -94,22 +94,6 @@ public class MapDisplayActivity extends Activity {
 
     }
 
-    /*private Bitmap getBitmap(Building b){
-        Bitmap bitmap=null;
-        ParseFile file = b.getFloorPlan();
-        byte[] data;
-        try {
-            data = file.getData();
-            bitmap = BitmapFactory
-                    .decodeByteArray(
-                            data, 0,
-                            data.length);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }*/
-
     Bitmap getBitmap(Building building){
         Bitmap bitmap;
         File file = new File(getFilesDir(),building.getObjectId());

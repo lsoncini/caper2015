@@ -59,6 +59,6 @@ public class FavoritesActivity extends ActionBarActivity implements StandList.St
 
     @Override
     public void onFavoriteListChanged() {
-        ((StandDetailFragment.FavoritesListener)slf).onFavoriteListChanged();
+        slf.onFavoriteListChanged();
     }
 }

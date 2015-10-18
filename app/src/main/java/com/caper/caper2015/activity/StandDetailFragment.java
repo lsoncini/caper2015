@@ -65,6 +65,7 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
     @Bind(R.id.description_title)   TextView descriptionTitle;
     @Bind(R.id.people_layout)       LinearLayout peopleLayout;
     @Bind(R.id.people_title)        TextView peopleTitle;
+    @Bind(R.id.actions_layout)      LinearLayout actionsLayout;
 
     public Company stand;
     public Bitmap bitmap;
@@ -113,6 +114,12 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
         updateView();
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateView();
+    }
+
     public StandDetailFragment setStand(Company stand) {
         this.stand = stand;
         updateView();
@@ -154,14 +161,14 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
             description.setText(descriptionStr);
         }
 
-        String actionsStr = stand.getPhone();
-        if(actionsStr!=null)
-            phone.setText(actionsStr);
-        actionsStr = stand.getWeb();
-        if(actionsStr!=null) {
+        String phoneStr = stand.getPhone();
+        if(phoneStr!=null)
+            phone.setText(phoneStr);
+        String webStr = stand.getWeb();
+        if(webStr!=null) {
             //web.setText(actionsStr);
             web.setTextColor(getResources().getColor(R.color.hyperlink_color));
-            SpannableString spanStr = new SpannableString(actionsStr);
+            SpannableString spanStr = new SpannableString(webStr);
             spanStr.setSpan(new UnderlineSpan(), 0, spanStr.length(), 0);
             web.setText(spanStr);
             web.setOnClickListener(new View.OnClickListener() {
@@ -173,10 +180,12 @@ public class StandDetailFragment extends LoadingFragment implements BoothListIte
                 }
             });
         }
-        actionsStr = stand.getEmail();
-        if(actionsStr!=null)
-            email.setText(actionsStr);
+        String mailStr = stand.getEmail();
+        if(mailStr!=null)
+            email.setText(mailStr);
 
+        if(phoneStr==null && mailStr==null && webStr==null)
+            actionsLayout.setVisibility(View.GONE);
         List<String> humanNameList= new ArrayList<String>();
         List<String> humanMailList= new ArrayList<String>();
 
