@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.caper.caper2015.R;
 
@@ -82,7 +81,8 @@ public class SettingsActivity extends ActionBarActivity {
             about.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(),"ABOUT CLICKED",Toast.LENGTH_LONG).show();
+                    Intent mainIntent = new Intent().setClass(getActivity(), AboutActivity.class);
+                    startActivity(mainIntent);
                 }
             });
 

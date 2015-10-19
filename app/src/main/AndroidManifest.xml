@@ -78,6 +78,17 @@
                 android:value="com.caper.caper2015.activity.MainActivity" />
         </activity>
         <activity
+            android:name=".activity.AboutActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/about_title"
+            android:parentActivityName=".activity.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/YellowActionBarTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.caper.caper2015.activity.SettingsActivity" />
+        </activity>
+        <activity
             android:name=".activity.MapDisplayActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_maps"
