@@ -1,8 +1,9 @@
 package com.caper.caper2015.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 import com.caper.caper2015.R;
@@ -11,16 +12,15 @@ import com.caper.caper2015.view.EventList;
 
 import java.util.ArrayList;
 
-public class EventsActivity extends ActionBarActivity implements EventList.EventListListener, EventDetailFragment.EventDetailListener {
+public class EventsActivity extends ActionBarActivity implements EventList.EventListListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().hide();
         setContentView(R.layout.activity_events);
 
         ArrayList<String> ids = getIntent().getExtras().getStringArrayList("ids");
+        Log.i("CANT IDS IN ACTIVITY", String.valueOf(ids.size()));
         if (savedInstanceState == null) {
 
             Bundle b = new Bundle();
@@ -42,10 +42,7 @@ public class EventsActivity extends ActionBarActivity implements EventList.Event
 
     @Override
     public void onEventSelected(Event event, int position) {
-        EventDetailFragment f = new EventDetailFragment().setEvent(event,position);
-        f.addEventDetailListener((EventDetailFragment.EventDetailListener)getParent());
-        f.addEventDetailListener(this);
-        navTo(f);
+        navTo(new EventDetailFragment().setEvent(event,position));
     }
 
     void navTo(LoadingFragment fragment) {
@@ -54,15 +51,5 @@ public class EventsActivity extends ActionBarActivity implements EventList.Event
                 .addToBackStack("")
                 .commit()
         ;
-    }
-
-    @Override
-    public void detailOpened() {
-        getSupportActionBar().show();
-    }
-
-    @Override
-    public void detailClosed() {
-        getSupportActionBar().hide();
     }
 }

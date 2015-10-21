@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
 
         events.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ZZEventsActivity.class);
+                Intent intent = new Intent(MainActivity.this, ScheduleActivity.class);
                 startActivity(intent);
             }
         });

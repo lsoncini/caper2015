@@ -45,6 +45,17 @@
                 android:value="com.caper.caper2015.activity.MainActivity" />
         </activity>
         <activity
+            android:name=".activity.ScheduleActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_schedule"
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/YellowActionBarTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.caper.caper2015.activity.MainActivity" />
+        </activity>
+        <activity
             android:name=".activity.StandsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_stands"

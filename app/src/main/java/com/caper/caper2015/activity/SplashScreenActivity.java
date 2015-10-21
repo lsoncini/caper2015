@@ -19,7 +19,6 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.caper.caper2015.R;
 import com.caper.caper2015.parse.Booth;
@@ -28,8 +27,6 @@ import com.caper.caper2015.parse.Company;
 import com.caper.caper2015.parse.Config;
 import com.caper.caper2015.parse.Event;
 import com.caper.caper2015.parse.Human;
-import com.parse.FunctionCallback;
-import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
@@ -37,9 +34,7 @@ import com.parse.SaveCallback;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -61,7 +56,11 @@ public class SplashScreenActivity extends Activity {
         @Override
         public void handleMessage(Message inputMessage) {
             super.handleMessage(inputMessage);
-            alertDialog.show();
+            String action = inputMessage.getData().getString("action");
+            if(action.equals("show dialog"))
+                alertDialog.show();
+            if(action.equals("updating"))
+                loadingTV.setText(getResources().getString(R.string.updating));
         }
     };
 
@@ -77,7 +76,7 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
 
-        getSharedPreferences("appData",MODE_PRIVATE).edit().putInt("version",1).commit();
+        getSharedPreferences("appData",MODE_PRIVATE).edit().putString("version","1.0.1").commit();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error_loading);
@@ -110,60 +109,18 @@ public class SplashScreenActivity extends Activity {
         timer.schedule(task, SPLASH_SCREEN_DELAY);
     }
 
-    private void cloudLoadFromParse() {
-
-        final List<String> classNames = new ArrayList<String>();
-        classNames.add("Booth");
-        classNames.add("Building");
-        classNames.add("Company");
-        classNames.add("Event");
-        classNames.add("Human");
-
-        for(final String className : classNames){
-            ParseCloud.callFunctionInBackground("getAll"+className,new HashMap<String, Object>(), new FunctionCallback<List<ParseObject>>() {
-                @Override
-                public void done(List<ParseObject> o, ParseException e) {
-                    if(e==null){
-                        ParseObject.pinAllInBackground(o,
-                                new SaveCallback() {
-                                    public void done(ParseException e) {
-                                        if(e==null){
-                                            SplashScreenActivity.loadedClasses++;
-                                            Toast.makeText(getApplicationContext(),className+"Done",Toast.LENGTH_SHORT);
-                                            if(loadedClasses==classNames.size()){//className.equals("Human")){
-
-                                                // Start the next activity
-                                                Intent mainIntent = new Intent().setClass(
-                                                        SplashScreenActivity.this, MainActivity.class);
-                                                startActivity(mainIntent);
-
-                                                // Close the activity so the user won't able to go back this
-                                                // activity pressing Back button
-                                                finish();
-                                            }
-                                        }else {
-                                            Log.i("SplashScreenActivity",
-                                                    "Error pinning objects: "
-                                                            + e.getMessage());
-                                        }
-                                    }
-                                });
-                    } else {
-                        Log.i("SplashScreenActivity",
-                                "loadFromParse: Error finding pinned objects: "
-                                        + e.getMessage());
-                    }
-                }
-            });
-        }
-    }
-
     private void loadFromParse() {
 
         if(!isNetworkAvailable() || dataUpdated()){
             startMainActivity();
             return;
         }
+
+        Bundle bundle = new Bundle();
+        bundle.putString("action","updating");
+        Message msg = Message.obtain();
+        msg.setData(bundle);
+        mhandler.sendMessage(msg);
 
         SaveCallback sc = new SaveCallback() {
             @Override
@@ -232,7 +189,11 @@ public class SplashScreenActivity extends Activity {
             startActivity(mainIntent);
             finish();
         } else{
-            mhandler.sendEmptyMessage(0);
+            Bundle bundle = new Bundle();
+            bundle.putString("action", "show dialog");
+            Message msg = Message.obtain();
+            msg.setData(bundle);
+            mhandler.sendMessage(msg);
         }
     }
 

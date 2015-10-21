@@ -9,11 +9,10 @@ import com.caper.caper2015.R;
 import com.caper.caper2015.parse.Booth;
 import com.caper.caper2015.parse.Company;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class StandListItem extends FrameLayout {
 
@@ -51,18 +50,6 @@ public class StandListItem extends FrameLayout {
             Booth booth = booths.get(0);
             principalTV.setText(booth.getCode());
             secondaryTV.setText(c.getSharedPreferences("buildingNames",Context.MODE_PRIVATE).getString(booth.getBuilding().getObjectId(),""));
-            /*ParseQuery<Building> query = new ParseQuery<Building>("Building").fromLocalDatastore();
-            query.getInBackground(booth.getBuilding().getObjectId(), new GetCallback<Building>() {
-                @Override
-                public void done(Building building, ParseException e) {
-                    if(e==null){
-                        secondaryTV.setText(building.getName());
-                    }
-                    else{
-                        e.printStackTrace();
-                    }
-                }
-            });*/
         }
         else{
             principalTV.setText(String.valueOf(booths.size()));

@@ -30,7 +30,7 @@
         android:padding="10dp"
         android:background="@android:color/transparent"
         android:textColor="@color/color_pallete_dark_gray"
-        android:maxLines="2"
+        android:maxLines="5"
         android:text="@string/add_favs_sub"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"/>

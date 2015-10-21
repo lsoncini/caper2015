@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:textAllCaps="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:background="@android:color/transparent"
                 android:textColor="#FFFFFF"
                 android:text="@string/events_title"/>
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:textAllCaps="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:background="@android:color/transparent"
                 android:textColor="#FFFFFF"
                 android:text="@string/maps_title"/>
@@ -117,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:textAllCaps="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:background="@android:color/transparent"
                 android:textColor="#FFFFFF"
                 android:text="@string/stands_title"/>
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:textAllCaps="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:background="@android:color/transparent"
                 android:textColor="#FFFFFF"
                 android:text="@string/info_title"/>
@@ -178,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:textAllCaps="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:background="@android:color/transparent"
                 android:textColor="#FFFFFF"
                 android:text="@string/favs_title"/>
@@ -205,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:textAllCaps="true"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:background="@android:color/transparent"
                 android:textColor="#FFFFFF"
                 android:text="@string/settings_title"/>

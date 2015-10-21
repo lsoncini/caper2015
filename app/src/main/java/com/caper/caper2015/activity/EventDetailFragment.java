@@ -72,12 +72,6 @@ public class EventDetailFragment extends LoadingFragment {
     public Event event;
     int position;
     public Bitmap bitmap;
-    List<EventDetailListener> l = new ArrayList<>();
-
-    public interface EventDetailListener{
-        public void detailOpened();
-        public void detailClosed();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,18 +92,6 @@ public class EventDetailFragment extends LoadingFragment {
         updateView();
     }
 
-    @Override
-    public void onDetach(){
-        super.onDetach();
-        for(EventDetailListener listener : l)
-            listener.detailClosed();
-    }
-
-    public void addEventDetailListener(EventDetailListener listener){
-        l.add(listener);
-        //listener.detailOpened();
-    }
-
     public EventDetailFragment setEvent(Event event, int position) {
         this.event = event;
         this.position = position;
@@ -123,8 +105,6 @@ public class EventDetailFragment extends LoadingFragment {
 
         loadFullEvent(event);
 
-        for(EventDetailListener e : l)
-            e.detailOpened();
         hideSpinner();
     }
 
@@ -144,7 +124,7 @@ public class EventDetailFragment extends LoadingFragment {
         startDate.setText(sdf.format(event.getDateStart()));
         endDate.setText(sdf.format(event.getDateEnd()));
         title.setText(event.getTitle());
-        title.setMaxLines(5);
+        title.setMaxLines(10);
         title.setTextColor(Color.WHITE);
         booth.setText(event.getBooth().getCode());
         booth.setTextColor(Color.WHITE);

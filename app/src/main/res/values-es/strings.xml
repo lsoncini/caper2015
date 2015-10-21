@@ -34,4 +34,5 @@
     <string name="description_company">Actividad principal</string>
     <string name="people_company">Contactos en la exposición</string>
     <string name="people_event">Disertantes</string>
+    <string name="updating">Actualizando...</string>
 </resources>
