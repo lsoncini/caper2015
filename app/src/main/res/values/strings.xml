@@ -17,6 +17,7 @@
 
     <string name="stands_title">Exhibitors</string>
     <string name="events_title">Schedule</string>
+    <string name="events_main_title">Schedule</string>
     <string name="maps_title">Floorplan</string>
     <string name="info_title">Info</string>
     <string name="favs_title">Favorites</string>

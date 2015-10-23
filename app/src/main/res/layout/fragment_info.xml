@@ -138,7 +138,7 @@
                 android:textColor="@android:color/black"
                 android:layout_centerVertical="true"
                 android:singleLine="true"
-                android:text="exposicion@caper.org"/>
+                android:text="consultas@caper.org"/>
         </RelativeLayout>
         <TextView
             android:layout_width="match_parent"

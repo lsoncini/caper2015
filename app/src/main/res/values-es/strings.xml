@@ -5,7 +5,7 @@
     <string name="actions">Información de contacto</string>
     <string name="companies">Empresas relacionadas</string>
     <string name="description">Descripción del evento</string>
-    <string name="events_title">Eventos</string>
+    <string name="events_title">Programa Académico</string>
     <string name="hello_world">Hola mundo!</string>
     <string name="info_title">Info</string>
     <string name="loading">Cargando...</string>
@@ -35,4 +35,5 @@
     <string name="people_company">Contactos en la exposición</string>
     <string name="people_event">Disertantes</string>
     <string name="updating">Actualizando...</string>
+    <string name="events_main_title">Programa</string>
 </resources>

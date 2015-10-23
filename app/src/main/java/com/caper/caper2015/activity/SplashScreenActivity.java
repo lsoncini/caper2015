@@ -76,7 +76,7 @@ public class SplashScreenActivity extends Activity {
         setContentView(R.layout.splash_screen);
         ButterKnife.bind(this);
 
-        getSharedPreferences("appData",MODE_PRIVATE).edit().putString("version","1.0.1").commit();
+        getSharedPreferences("appData",MODE_PRIVATE).edit().putString("version","1.1.0").commit();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.error_loading);
